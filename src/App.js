@@ -435,12 +435,7 @@ export default function FinancialIntelligencePlatform() {
   const [sources, setSources] = useState(null);
   const logRef = useRef(null);
 
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.textContent = CSS;
-    document.head.appendChild(style);
-    return () => document.head.removeChild(style);
-  }, []);
+  // CSS injected via <style> tag instead to avoid hydration errors
 
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
@@ -611,6 +606,7 @@ Keep each section tight — c-suite level, no filler. Query: ${query}`;
 
   return (
     <div className="app">
+      <style>{CSS}</style>
       {/* Header */}
       <header className="header">
         <div className="logo">
